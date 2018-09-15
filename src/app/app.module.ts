@@ -1,16 +1,38 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
+import { StopwatchComponent, MinuteSecondsPipe } from './app.component';
+import { NbThemeModule } from '@nebular/theme';
+import { NbSidebarModule, NbLayoutModule, NbSidebarService, NbActionsModule, NbCardModule, NbProgressBarModule, NbAlertModule } from '@nebular/theme';
+
+const appRoutes: Routes = [
+  { path: '', component: StopwatchComponent },
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    StopwatchComponent,
+    MinuteSecondsPipe
   ],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(
+      appRoutes
+    ),
+    BrowserModule,
+    BrowserAnimationsModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbSidebarModule,
+    NbActionsModule,
+    NbCardModule,
+    NbProgressBarModule,
+    NbAlertModule,
+    FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [NbSidebarService, MinuteSecondsPipe],
+  bootstrap: [StopwatchComponent]
 })
 export class AppModule { }
