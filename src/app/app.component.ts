@@ -83,7 +83,7 @@ export class StopwatchComponent implements OnInit {
     const source1 = timer(0, 1000);
 
     const subscribe1 = source1.subscribe(val => {
-      this.timer$ = (-60) + val;
+      this.timer$ = val;
       this.timer3 = 100 - val;
       this.checkConditions(val);
     });
