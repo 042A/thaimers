@@ -42,7 +42,7 @@ export class ReversePipe implements PipeTransform  {
     trigger('flyInOut', [
       state('in', style({transform: 'translateX(0)'})),
       transition('void => *', [
-        style({opacity: 0, transform: 'translateX(-100%)'}),
+        style({opacity: 0, transform: 'translateX(+100%)'}),
         animate('0.2s ease-in')
       ]),
       transition('* => void', [
@@ -71,15 +71,15 @@ export class StopwatchComponent implements OnInit {
   constructor(private todoDataService: TodoDataService) {
   }
 
-  addTodo2(title, color) {
+  addTodo2(title, color, timestamp) {
     this.newTodo = {
       id: 1,
       title: title,
       color: color,
-      timestamp: '13:37',
+      timestamp: timestamp,
       complete: false
     };
-    
+
     this.todoDataService.addTodo(this.newTodo);
   }
 
@@ -137,8 +137,8 @@ export class StopwatchComponent implements OnInit {
     setTimeout(function() {
       this.destroyRuneSpawn();
       subscribe2.unsubscribe();
+      this.addTodo2('rune', 'active', this.timer$);
       this.timer2 = 0;
-      this.addTodo2('rune', 'active', '13:37');
     }.bind(this), this.hinttime);
   }
 

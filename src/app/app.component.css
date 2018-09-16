@@ -1,3 +1,11 @@
 nb-chat {
   width: 100%;
   }
+
+  .nospace {
+    position: absolute;
+    bottom: 0px;
+    margin-top: -10px;
+    margin-left: -10px;
+    font-size: 7em;
+  }

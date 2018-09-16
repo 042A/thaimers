@@ -1,6 +1,6 @@
 <nb-layout>
   <nb-layout-header fixed>
-    <h4>Dotta Taj-mers</h4>
+    <h4>Dotta Thai-mers</h4>
 
     <nb-actions size="medium">
       <nb-action (click)="startTimer()" icon="nb-power-circled"></nb-action>
@@ -14,13 +14,11 @@
 
   <nb-layout-column>
 
-    <nb-card *ngIf="timer$ > 0">
-        <nb-card-body>
-         <!--     {{ timer3 }}
+    <div *ngIf="timer$ > 0" class="nospace">
+               <!--     {{ timer3 }}
             {{ timer4 }} -->
-         <h1 >{{ timer$ | minuteSeconds }}</h1>
-         </nb-card-body>
-      </nb-card>
+         {{ timer$ | minuteSeconds }}
+    </div>
 
       <nb-card *ngIf="!running" (@flyInOut.start)="animationStarted($event)"
       (@flyInOut.done)="animationDone($event)"
@@ -37,7 +35,7 @@
           </nb-card-footer>
         </nb-card>
 
-          <nb-card *ngIf="spawned">
+          <nb-card *ngIf="spawned" >
             <nb-card-header>Power-up rune spawns!  {{ spawntimer }}</nb-card-header>
             <nb-card-body>
                 <nb-progress-bar [value]="timer2"></nb-progress-bar>
@@ -47,7 +45,7 @@
   </nb-layout-column>
 
   <nb-sidebar>
-      <nb-badge text="new" status="success" position="top right">{{todo.timestamp}}</nb-badge>
+
             <div *ngIf="todos.length > 0">
               <div
               *ngFor="let todo of todos.slice().reverse()"
@@ -57,7 +55,7 @@
 
                   <nb-alert status="{{todo.color}}">
                       <label>{{todo.title}}</label>
-                     
+                      <nb-badge text="{{todo.timestamp | minuteSeconds}}" status="success" position="top right"></nb-badge>
                   </nb-alert>
 
                 </div>
