@@ -4,7 +4,7 @@
 
     <nb-actions size="medium">
       <nb-action (click)="startTimer()" icon="nb-power-circled"></nb-action>
-      <nb-action (click)="sendMessage('sdsdsd', 'John', 'https://i.gifer.com/no.gif', false)" icon="nb-person" disabled></nb-action>
+      <nb-action (click)="addTodo2()" icon="nb-person" disabled></nb-action>
       <nb-action icon="nb-gear" disabled></nb-action>
     </nb-actions>
 
@@ -13,13 +13,29 @@
  <!--  <nb-sidebar>Sidebar Content</nb-sidebar> -->
 
   <nb-layout-column>
-    <nb-card>
+
+    <nb-card *ngIf="timer$ > 0">
         <nb-card-body>
-             {{ timer3 }}
-            {{ timer4 }}
-         <h1>{{ timer$ | minuteSeconds }}</h1>
+         <!--     {{ timer3 }}
+            {{ timer4 }} -->
+         <h1 >{{ timer$ | minuteSeconds }}</h1>
          </nb-card-body>
       </nb-card>
+
+      <nb-card *ngIf="!running" (@flyInOut.start)="animationStarted($event)"
+      (@flyInOut.done)="animationDone($event)"
+      [@flyInOut]="'in'" >
+          <nb-card-header>Get ready!</nb-card-header>
+          <nb-card-body>
+            <h1>Description</h1>
+              <p>Start the timer exactly at -01:00.</p>
+              <p> Lorem ipsum for typographic purposes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed maximus ex, id scelerisque arcu. Nunc congue fringilla dolor sed ultricies. Etiam sit amet auctor urna. In blandit, tortor rhoncus sagittis gravida, ex erat posuere orci, a eleifend magna felis a orci. </p>
+              <p>Pellentesque at dui eget turpis tincidunt sagittis id id dui. Phasellus leo arcu, ultricies in cursus eget, tempus at metus. Quisque vestibulum nec tellus at porttitor. Aenean posuere vestibulum odio, ut pharetra est dignissim ac. Nam tincidunt id ex ac eleifend. Quisque vulputate, lectus eu scelerisque cursus, erat purus malesuada nibh, eget viverra sem ante at enim. Etiam ut vehicula est, fringilla porttitor orci. Mauris pulvinar rhoncus pellentesque. Nunc tincidunt metus eget feugiat pretium. </p>
+          </nb-card-body>
+          <nb-card-footer>
+            <button (click)="startTimer()" nbButton fullWidth status="danger">Start the ultimate timer experience</button>
+          </nb-card-footer>
+        </nb-card>
 
           <nb-card *ngIf="spawned">
             <nb-card-header>Power-up rune spawns!  {{ spawntimer }}</nb-card-header>
@@ -31,9 +47,28 @@
   </nb-layout-column>
 
   <nb-sidebar>
-    <nb-alert status="success">
-      Grief box.
-    </nb-alert>
+      <nb-badge text="new" status="success" position="top right">{{todo.timestamp}}</nb-badge>
+            <div *ngIf="todos.length > 0">
+              <div
+              *ngFor="let todo of todos.slice().reverse()"
+              (@flyInOut.start)="animationStarted($event)"
+              (@flyInOut.done)="animationDone($event)"
+              [@flyInOut]="'in'" [class.completed]="todo.complete">
+
+                  <nb-alert status="{{todo.color}}">
+                      <label>{{todo.title}}</label>
+                     
+                  </nb-alert>
+
+                </div>
+                </div>
+
+
+
+
+
+
+
   </nb-sidebar>
 
 
