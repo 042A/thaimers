@@ -27,7 +27,7 @@ export class TimeSettingsComponent {
     this.createdObject.push(entryData);
     console.log (this.createdObject);
     intStart = intStart + intInterval;
-    } while (intStart < (60 * 60));
+    } while (intStart < (60 * 20));
     document.getElementById('objectarray').innerHTML = JSON.stringify(this.createdObject, null, 4);
   }
 
