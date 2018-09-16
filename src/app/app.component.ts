@@ -1,6 +1,5 @@
-import { Component, ElementRef, OnInit, OnDestroy, Input } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { timer, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
 import {Todo} from './todo';
 import {TodoDataService} from './todo-data.service';
@@ -11,7 +10,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
-
+import { ModalService } from './modal/modal.service';
 
 @Pipe({
   name: 'minuteSeconds'
@@ -24,14 +23,7 @@ export class MinuteSecondsPipe implements PipeTransform {
   }
 }
 
-@Pipe({
-  name: 'reverse'
-})
-export class ReversePipe implements PipeTransform  {
-  transform(value) {
-    return value.slice().reverse();
-  }
-}
+
 
 @Component({
   selector: 'app-root',
@@ -59,48 +51,30 @@ export class StopwatchComponent implements OnInit {
   timer$;
   timer2;
   timer3;
-  spawnsPre: any = [2, 16, 24];
-  spawnsPre2: any = [9, 32, 40];
+  spawnsPre: any = [2, 35];
+  spawnsPre2: any = [18, 52];
   spawned = false;
-  hinttime = 5000;
+  hinttime = 15000;
   spawntimer;
   running = false;
-
   newTodo: Todo = new Todo();
 
-  constructor(private todoDataService: TodoDataService) {
+  constructor(private todoDataService: TodoDataService, private modalService: ModalService) {
   }
 
-  addTodo2(title, color, timestamp) {
-    this.newTodo = {
-      id: 1,
-      title: title,
-      color: color,
-      timestamp: timestamp,
-      complete: false
-    };
-
-    this.todoDataService.addTodo(this.newTodo);
+  ngOnInit(): void {
   }
 
-  addTodo() {
-    this.todoDataService.addTodo(this.newTodo);
-    this.newTodo = new Todo();
+  openModal(id: string) {
+    this.modalService.open(id);
+    console.log ('open modal ' + id);
   }
 
-  toggleTodoComplete(todo) {
-    this.todoDataService.toggleTodoComplete(todo);
+  closeModal(id: string) {
+      this.modalService.close(id);
   }
 
-  removeTodo(todo) {
-    this.todoDataService.deleteTodoById(todo.id);
-  }
-
-  get todos() {
-    return this.todoDataService.getAllTodos();
-  }
-
-    startTimer() {
+  startTimer() {
     this.running = true;
     console.log ('Startar timer');
     const source1 = timer(0, 1000);
@@ -110,10 +84,6 @@ export class StopwatchComponent implements OnInit {
       this.timer3 = 100 - val;
       this.checkConditions(val);
     });
-  }
-
-
-  ngOnInit(): void {
   }
 
   checkConditions(val) {
@@ -137,7 +107,7 @@ export class StopwatchComponent implements OnInit {
     setTimeout(function() {
       this.destroyRuneSpawn();
       subscribe2.unsubscribe();
-      this.addTodo2('rune', 'active', this.timer$);
+      this.addHistoryEntry('Powerup Rune Spawned!', 'active', this.timer$);
       this.timer2 = 0;
     }.bind(this), this.hinttime);
   }
@@ -152,8 +122,8 @@ export class StopwatchComponent implements OnInit {
     setTimeout(function() {
       this.destroyRuneSpawn();
       subscribe2.unsubscribe();
+      this.addHistoryEntry('Bounty Rune Spawned!', 'info', this.timer$);
       this.timer2 = 0;
-      this.addTodo2('vafam', 'info', '13:37');
     }.bind(this), this.hinttime);
   }
 
@@ -162,10 +132,28 @@ export class StopwatchComponent implements OnInit {
     console.log('Power up rune spawned: spawned: ' + this.spawned);
    }
 
-
   destroyRuneSpawn(): void {
       this.spawned = false;
       console.log('Power up rune spawned: spawned: ' + this.spawned);
+  }
+
+  addCustom() {
+    this.addHistoryEntry('Custom event', 'danger', this.timer$);
+  }
+
+  addHistoryEntry(title, color, timestamp) {
+    this.newTodo = {
+      id: 1,
+      title: title,
+      color: color,
+      timestamp: timestamp,
+      complete: false
+    };
+    this.todoDataService.addHistoryEntry(this.newTodo);
+  }
+
+  get todos() {
+    return this.todoDataService.getAllTodos();
   }
 
 }

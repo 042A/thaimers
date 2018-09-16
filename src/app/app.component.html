@@ -1,73 +1,81 @@
 <nb-layout>
-  <nb-layout-header fixed>
-    <h4>Dotta Thai-mers</h4>
+    <nb-layout-header fixed>
 
-    <nb-actions size="medium">
-      <nb-action (click)="startTimer()" icon="nb-power-circled"></nb-action>
-      <nb-action (click)="addTodo2()" icon="nb-person" disabled></nb-action>
-      <nb-action icon="nb-gear" disabled></nb-action>
-    </nb-actions>
+        <h4>Dotta Thai-mers</h4>
+        <nb-actions size="large" fullWidth>
+        <nb-action
+        (click)="addCustom()"
+        icon="nb-person"
+        badgeText="Add"
+        badgeStatus="danger">
+        </nb-action>
+        <nb-action
+        icon="nb-gear"
+        badgeText="Settings"
+        badgeStatus="danger"
+        (click)="openModal('custom-modal-1')">
+        </nb-action>
+        </nb-actions>
 
-  </nb-layout-header>
+          <app-jw-modal id="custom-modal-1">
+              <app-settings></app-settings>
+        </app-jw-modal>
 
- <!--  <nb-sidebar>Sidebar Content</nb-sidebar> -->
+    </nb-layout-header>
+    <nb-layout-column>
 
-  <nb-layout-column>
+        <div *ngIf="timer$ > 0" class="nospace">
+            {{ timer$ | minuteSeconds }}
+        </div>
 
-    <div *ngIf="timer$ > 0" class="nospace">
-               <!--     {{ timer3 }}
-            {{ timer4 }} -->
-         {{ timer$ | minuteSeconds }}
-    </div>
-
-      <nb-card *ngIf="!running" (@flyInOut.start)="animationStarted($event)"
-      (@flyInOut.done)="animationDone($event)"
-      [@flyInOut]="'in'" >
-          <nb-card-header>Get ready!</nb-card-header>
-          <nb-card-body>
-            <h1>Description</h1>
-              <p>Start the timer exactly at -01:00.</p>
-              <p> Lorem ipsum for typographic purposes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed maximus ex, id scelerisque arcu. Nunc congue fringilla dolor sed ultricies. Etiam sit amet auctor urna. In blandit, tortor rhoncus sagittis gravida, ex erat posuere orci, a eleifend magna felis a orci. </p>
-              <p>Pellentesque at dui eget turpis tincidunt sagittis id id dui. Phasellus leo arcu, ultricies in cursus eget, tempus at metus. Quisque vestibulum nec tellus at porttitor. Aenean posuere vestibulum odio, ut pharetra est dignissim ac. Nam tincidunt id ex ac eleifend. Quisque vulputate, lectus eu scelerisque cursus, erat purus malesuada nibh, eget viverra sem ante at enim. Etiam ut vehicula est, fringilla porttitor orci. Mauris pulvinar rhoncus pellentesque. Nunc tincidunt metus eget feugiat pretium. </p>
-          </nb-card-body>
-          <nb-card-footer>
-            <button (click)="startTimer()" nbButton fullWidth status="danger">Start the ultimate timer experience</button>
-          </nb-card-footer>
+        <nb-card  *ngIf="!running"
+        [@flyInOut]="'in'" >
+            <nb-card-header>Get ready!</nb-card-header>
+            <nb-card-body>
+                <h1>Description</h1>
+                <p>Start the timer exactly at -01:00.</p>
+                <p> Lorem ipsum for typographic purposes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed maximus ex, id scelerisque arcu. Nunc congue fringilla dolor sed ultricies. Etiam sit amet auctor urna. In blandit, tortor rhoncus sagittis gravida, ex erat posuere orci, a eleifend magna felis a orci. </p>
+                <p>Pellentesque at dui eget turpis tincidunt sagittis id id dui. Phasellus leo arcu, ultricies in cursus eget, tempus at metus. Quisque vestibulum nec tellus at porttitor. Aenean posuere vestibulum odio, ut pharetra est dignissim ac. Nam tincidunt id ex ac eleifend. Quisque vulputate, lectus eu scelerisque cursus, erat purus malesuada nibh, eget viverra sem ante at enim. Etiam ut vehicula est, fringilla porttitor orci. Mauris pulvinar rhoncus pellentesque. Nunc tincidunt metus eget feugiat pretium. </p>
+            </nb-card-body>
+            <nb-card-footer>
+                <button (click)="startTimer()" nbButton fullWidth status="danger">Start the ultimate timer experience</button>
+            </nb-card-footer>
         </nb-card>
 
-          <nb-card *ngIf="spawned" >
-            <nb-card-header>Power-up rune spawns!  {{ spawntimer }}</nb-card-header>
+
+        <nb-card *ngIf="spawned" >
+            <nb-card-header>Power-up rune spawns!  {{ spawntimer | number:'1.0-0' }}</nb-card-header>
             <nb-card-body>
-                <nb-progress-bar [value]="timer2"></nb-progress-bar>
+                 <nb-progress-bar [value]="timer2"></nb-progress-bar>
             </nb-card-body>
         </nb-card>
 
-  </nb-layout-column>
-
-  <nb-sidebar>
-
-            <div *ngIf="todos.length > 0">
-              <div
-              *ngFor="let todo of todos.slice().reverse()"
-              (@flyInOut.start)="animationStarted($event)"
-              (@flyInOut.done)="animationDone($event)"
-              [@flyInOut]="'in'" [class.completed]="todo.complete">
-
-                  <nb-alert status="{{todo.color}}">
-                      <label>{{todo.title}}</label>
-                      <nb-badge text="{{todo.timestamp | minuteSeconds}}" status="success" position="top right"></nb-badge>
-                  </nb-alert>
-
-                </div>
-                </div>
+        <nb-card>
+                <nb-card-header>Swischa pengar gratis</nb-card-header>
+                <nb-card-body>
+                    Du vet va ja mener
+                </nb-card-body>
+        </nb-card>
 
 
 
 
+    </nb-layout-column>
+    <nb-sidebar>
 
+    <div *ngIf="todos.length > 0">
+        <div *ngFor="let todo of todos.slice().reverse()"
+        [@flyInOut]="'in'" [class.completed]="todo.complete">
+            <nb-alert status="{{todo.color}}">
+            {{todo.title}}
+            <nb-badge text="{{todo.timestamp | minuteSeconds}}" status="success" position="top right"></nb-badge>
+            </nb-alert>
+        </div>
+    </div>
 
+    <nb-alert status="success" *ngIf="timer$ > 0">
+        Timer is running
+    </nb-alert>
 
-  </nb-sidebar>
-
-
+    </nb-sidebar>
 </nb-layout>
