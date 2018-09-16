@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StopwatchComponent, MinuteSecondsPipe } from './app.component';
 import { NbThemeModule } from '@nebular/theme';
-import { NbSidebarModule, NbLayoutModule, NbSidebarService, NbActionsModule } from '@nebular/theme';
+import { NbSidebarModule, NbLayoutModule, NbSidebarService, NbActionsModule, NbInputModule } from '@nebular/theme';
 import { NbCardModule, NbProgressBarModule, NbAlertModule, NbButtonModule, NbBadgeModule} from '@nebular/theme';
 import { ModalComponent } from './modal/modal.component';
 import { ModalService } from './modal/modal.service';
@@ -41,7 +41,8 @@ const appRoutes: Routes = [
     NbProgressBarModule,
     NbAlertModule,
     NbButtonModule,
-    NbBadgeModule
+    NbBadgeModule,
+    NbInputModule
   ],
   entryComponents: [
     ModalComponent

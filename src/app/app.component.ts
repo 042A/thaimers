@@ -53,11 +53,14 @@ export class StopwatchComponent implements OnInit {
   timer3;
   spawnsPre: any = [2, 35];
   spawnsPre2: any = [18, 52];
+  spawns: { id: number, time: number, color: string, text: string }[]  =
+  [ { "id": 1, "time": 10, "color": "active", "text": "PowerUp Rune" }, { "id": 2, "time": 40, "color": "active", "text": "PowerUp Rune" }, { "id": 3, "time": 70, "color": "active", "text": "PowerUp Rune" }, { "id": 4, "time": 100, "color": "active", "text": "PowerUp Rune" }, { "id": 5, "time": 130, "color": "active", "text": "PowerUp Rune" }, { "id": 6, "time": 160, "color": "active", "text": "PowerUp Rune" }, { "id": 7, "time": 190, "color": "active", "text": "PowerUp Rune" }, { "id": 8, "time": 220, "color": "active", "text": "PowerUp Rune" }, { "id": 9, "time": 250, "color": "active", "text": "PowerUp Rune" }, { "id": 10, "time": 280, "color": "active", "text": "PowerUp Rune" }, { "id": 11, "time": 310, "color": "active", "text": "PowerUp Rune" }, { "id": 12, "time": 340, "color": "active", "text": "PowerUp Rune" }, { "id": 13, "time": 370, "color": "active", "text": "PowerUp Rune" }, { "id": 14, "time": 400, "color": "active", "text": "PowerUp Rune" }, { "id": 15, "time": 430, "color": "active", "text": "PowerUp Rune" }, { "id": 16, "time": 460, "color": "active", "text": "PowerUp Rune" }, { "id": 17, "time": 490, "color": "active", "text": "PowerUp Rune" }, { "id": 18, "time": 520, "color": "active", "text": "PowerUp Rune" }, { "id": 19, "time": 550, "color": "active", "text": "PowerUp Rune" }, { "id": 20, "time": 580, "color": "active", "text": "PowerUp Rune" }, { "id": 21, "time": 610, "color": "active", "text": "PowerUp Rune" }, { "id": 22, "time": 640, "color": "active", "text": "PowerUp Rune" }, { "id": 23, "time": 670, "color": "active", "text": "PowerUp Rune" }, { "id": 24, "time": 700, "color": "active", "text": "PowerUp Rune" }, { "id": 25, "time": 730, "color": "active", "text": "PowerUp Rune" }, { "id": 26, "time": 760, "color": "active", "text": "PowerUp Rune" }, { "id": 27, "time": 790, "color": "active", "text": "PowerUp Rune" }, { "id": 28, "time": 820, "color": "active", "text": "PowerUp Rune" }, { "id": 29, "time": 850, "color": "active", "text": "PowerUp Rune" }, { "id": 30, "time": 880, "color": "active", "text": "PowerUp Rune" }, { "id": 31, "time": 910, "color": "active", "text": "PowerUp Rune" }, { "id": 32, "time": 940, "color": "active", "text": "PowerUp Rune" }, { "id": 33, "time": 970, "color": "active", "text": "PowerUp Rune" }, { "id": 34, "time": 1000, "color": "active", "text": "PowerUp Rune" }, { "id": 35, "time": 1030, "color": "active", "text": "PowerUp Rune" }, { "id": 36, "time": 1060, "color": "active", "text": "PowerUp Rune" }, { "id": 37, "time": 1090, "color": "active", "text": "PowerUp Rune" }, { "id": 38, "time": 1120, "color": "active", "text": "PowerUp Rune" }, { "id": 39, "time": 1150, "color": "active", "text": "PowerUp Rune" }, { "id": 40, "time": 1180, "color": "active", "text": "PowerUp Rune" }, { "id": 1, "time": 25, "color": "danger", "text": "Bounty Rune" }, { "id": 2, "time": 85, "color": "danger", "text": "Bounty Rune" }, { "id": 3, "time": 145, "color": "danger", "text": "Bounty Rune" }, { "id": 4, "time": 205, "color": "danger", "text": "Bounty Rune" }, { "id": 5, "time": 265, "color": "danger", "text": "Bounty Rune" }, { "id": 6, "time": 325, "color": "danger", "text": "Bounty Rune" }, { "id": 7, "time": 385, "color": "danger", "text": "Bounty Rune" }, { "id": 8, "time": 445, "color": "danger", "text": "Bounty Rune" }, { "id": 9, "time": 505, "color": "danger", "text": "Bounty Rune" }, { "id": 10, "time": 565, "color": "danger", "text": "Bounty Rune" }, { "id": 11, "time": 625, "color": "danger", "text": "Bounty Rune" }, { "id": 12, "time": 685, "color": "danger", "text": "Bounty Rune" }, { "id": 13, "time": 745, "color": "danger", "text": "Bounty Rune" }, { "id": 14, "time": 805, "color": "danger", "text": "Bounty Rune" }, { "id": 15, "time": 865, "color": "danger", "text": "Bounty Rune" }, { "id": 16, "time": 925, "color": "danger", "text": "Bounty Rune" }, { "id": 17, "time": 985, "color": "danger", "text": "Bounty Rune" }, { "id": 18, "time": 1045, "color": "danger", "text": "Bounty Rune" }, { "id": 19, "time": 1105, "color": "danger", "text": "Bounty Rune" }, { "id": 20, "time": 1165, "color": "danger", "text": "Bounty Rune" } ];
   spawned = false;
-  hinttime = 15000;
+  hinttime = 10000;
   spawntimer;
   running = false;
   newTodo: Todo = new Todo();
+  eventName;
 
   constructor(private todoDataService: TodoDataService, private modalService: ModalService) {
   }
@@ -87,17 +90,17 @@ export class StopwatchComponent implements OnInit {
   }
 
   checkConditions(val) {
-    if ( this.spawnsPre.includes(val) ) {
-      this.runeSpawn();
-    }
-    if ( this.spawnsPre2.includes(val) ) {
-      this.runeSpawn2();
+    if (this.spawns.some(e => e.time === val)) {
+      const spawnsStore =  this.spawns.find(x => x.time === val);
+      console.log (spawnsStore);
+      this.runeSpawnData(spawnsStore);
     } else {
       return;
     }
   }
 
-  runeSpawn(): void {
+  runeSpawnData(spawnProperties): void {
+    this.eventName = spawnProperties.text;
     this.displayRuneSpawn();
     const source2 = timer(0, 100);
     const subscribe2 = source2.subscribe(val => {
@@ -107,22 +110,7 @@ export class StopwatchComponent implements OnInit {
     setTimeout(function() {
       this.destroyRuneSpawn();
       subscribe2.unsubscribe();
-      this.addHistoryEntry('Powerup Rune Spawned!', 'active', this.timer$);
-      this.timer2 = 0;
-    }.bind(this), this.hinttime);
-  }
-
-  runeSpawn2(): void {
-    this.displayRuneSpawn();
-    const source2 = timer(0, 100);
-    const subscribe2 = source2.subscribe(val => {
-      this.timer2 = 1 / this.hinttime * 10000 * val;
-      this.spawntimer = this.hinttime * 0.001 - val * .1;
-      });
-    setTimeout(function() {
-      this.destroyRuneSpawn();
-      subscribe2.unsubscribe();
-      this.addHistoryEntry('Bounty Rune Spawned!', 'info', this.timer$);
+      this.addHistoryEntry(spawnProperties.text, spawnProperties.color, this.timer$);
       this.timer2 = 0;
     }.bind(this), this.hinttime);
   }

@@ -7,24 +7,29 @@ import { ModalService } from './modal/modal.service';
 })
 
 export class TimeSettingsComponent {
+  eventName = '';
+  startTime: number;
+  intervalTime: number;
+  inputColor = '';
 
-  times = [];
-  start = 0;
-  interval = 5 * 60;
-  stop = 60 * 60;
+  createdObject: { id: number, time: number, color: string, text: string }[] = [];
+
 
   constructor(private modalService: ModalService) { }
 
   makeTimeTable(): void {
-    console.log ('startet');
-    const length = this.times.push(this.start);
-    let n = this.start;
+    console.log ('Generating timetable based on: ' + this.eventName + this.startTime + this.intervalTime + this.inputColor);
+    let id = 0;
+    let intStart = Number(this.startTime);
+    const intInterval = Number(this.intervalTime);
     do {
-    n++;
-    this.start = this.start + this.interval;
-    this.times.push(this.start);
-    console.log (this.times);
-    } while (this.start < (60 * 60));
+    id++;
+    const entryData = {id: id, time: intStart, color: this.inputColor, text: this.eventName};
+    this.createdObject.push(entryData);
+    console.log (this.createdObject);
+    intStart = intStart + intInterval;
+    } while (intStart < (60 * 20));
+    document.getElementById('objectarray').innerHTML = JSON.stringify(this.createdObject, null, 4);
   }
 
   closeModal(id: string) {

@@ -1,14 +1,31 @@
-<nb-card>
-    <nb-card-header>Check your privilage!</nb-card-header>
-    <nb-card-body>
-        <button  (click)=" makeTimeTable()" nbButton fullWidth status="danger">Make timetable</button>
-        <p>Pellentesque at dui eget turpis tincidunt sagittis id id dui. Phasellus leo arcu,
-          ultricies in cursus eget, tempus at metus. Quisque vestibulum nec tellus at porttitor.
-          Aenean posuere vestibulum odio, ut pharetra est dignissim ac.
-        </p>
+<nb-layout>
 
-    </nb-card-body>
-    <nb-card-footer>
-        <button  (click)="closeModal('custom-modal-1');" nbButton fullWidth status="danger">Fuck this</button>
-    </nb-card-footer>
-</nb-card>
+  <nb-layout-column>
+    <nb-card>
+        <nb-card-header>Print da array of your dream</nb-card-header>
+        <nb-card-body>
+            <code style="font-size: 6px;" id="objectarray"></code>
+        </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+
+  <nb-layout-column>
+    <nb-card style="width: 100%;">
+        <nb-card-header>Check your privilage!</nb-card-header>
+        <nb-card-body>
+
+            <input class="modinput" type="text" nbInput fullWidth status="danger" placeholder="Event name" [(ngModel)]="eventName">
+            <input class="modinput" type="text" nbInput fullWidth status="danger" placeholder="Start time" [(ngModel)]="startTime">
+            <input class="modinput" type="text" nbInput fullWidth status="danger" placeholder="Interval time" [(ngModel)]="intervalTime">
+            <input class="modinput" type="text" nbInput fullWidth status="danger" placeholder="Color" [(ngModel)]="inputColor">
+            <button  (click)=" makeTimeTable()" nbButton fullWidth status="danger">Make timetable</button>
+
+
+        </nb-card-body>
+        <nb-card-footer>
+            <button  (click)="closeModal('custom-modal-1');" nbButton fullWidth status="danger">Fuck this</button>
+        </nb-card-footer>
+    </nb-card>
+  </nb-layout-column>
+
+</nb-layout>

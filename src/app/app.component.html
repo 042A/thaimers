@@ -44,7 +44,7 @@
 
 
         <nb-card *ngIf="spawned" >
-            <nb-card-header>Power-up rune spawns!  {{ spawntimer | number:'1.0-0' }}</nb-card-header>
+            <nb-card-header>{{eventName}} is about to spawn!  {{ spawntimer | number:'1.0-0' }}</nb-card-header>
             <nb-card-body>
                  <nb-progress-bar [value]="timer2"></nb-progress-bar>
             </nb-card-body>
@@ -67,7 +67,7 @@
         <div *ngFor="let todo of todos.slice().reverse()"
         [@flyInOut]="'in'" [class.completed]="todo.complete">
             <nb-alert status="{{todo.color}}">
-            {{todo.title}}
+            {{todo.title}} spawned!
             <nb-badge text="{{todo.timestamp | minuteSeconds}}" status="success" position="top right"></nb-badge>
             </nb-alert>
         </div>
