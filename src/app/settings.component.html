@@ -7,10 +7,13 @@
             <code style="font-size: 6px;" id="objectarray"></code>
         </nb-card-body>
     </nb-card>
+
+    <button  (click)="closeModal('custom-modal-1');" nbButton fullWidth status="danger">Worst placement of a close button ever</button>
+
   </nb-layout-column>
 
   <nb-layout-column>
-    <nb-card style="width: 100%;">
+    <nb-card>
         <nb-card-header>Check your privilage!</nb-card-header>
         <nb-card-body>
 
@@ -18,14 +21,16 @@
             <input class="modinput" type="text" nbInput fullWidth status="danger" placeholder="Start time" [(ngModel)]="startTime">
             <input class="modinput" type="text" nbInput fullWidth status="danger" placeholder="Interval time" [(ngModel)]="intervalTime">
             <input class="modinput" type="text" nbInput fullWidth status="danger" placeholder="Color" [(ngModel)]="inputColor">
-            <button  (click)=" makeTimeTable()" nbButton fullWidth status="danger">Make timetable</button>
 
 
         </nb-card-body>
         <nb-card-footer>
-            <button  (click)="closeModal('custom-modal-1');" nbButton fullWidth status="danger">Fuck this</button>
+            <button  (click)="makeTimeTable()" class="modinput" nbButton fullWidth status="danger">Make timetable</button>
+            <button  (click)="resetTimeTable()" class="modinput" nbButton fullWidth status="warning">Reset timetable</button>
+
         </nb-card-footer>
     </nb-card>
+
   </nb-layout-column>
 
 </nb-layout>

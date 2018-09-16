@@ -45,9 +45,10 @@
 
         <nb-card *ngIf="spawned" >
             <nb-card-header>{{eventName}} is about to spawn!  {{ spawntimer | number:'1.0-0' }}</nb-card-header>
-            <nb-card-body>
-                 <nb-progress-bar [value]="timer2"></nb-progress-bar>
-            </nb-card-body>
+
+            <nb-card-footer>
+                <nb-progress-bar status="danger" [value]="timer2"></nb-progress-bar>
+            </nb-card-footer>
         </nb-card>
 
         <nb-card>

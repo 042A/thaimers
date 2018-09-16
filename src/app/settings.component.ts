@@ -5,7 +5,6 @@ import { ModalService } from './modal/modal.service';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
 })
-
 export class TimeSettingsComponent {
   eventName = '';
   startTime: number;
@@ -28,8 +27,12 @@ export class TimeSettingsComponent {
     this.createdObject.push(entryData);
     console.log (this.createdObject);
     intStart = intStart + intInterval;
-    } while (intStart < (60 * 20));
+    } while (intStart < (60 * 60));
     document.getElementById('objectarray').innerHTML = JSON.stringify(this.createdObject, null, 4);
+  }
+
+  resetTimeTable() {
+    this.createdObject = [];
   }
 
   closeModal(id: string) {
