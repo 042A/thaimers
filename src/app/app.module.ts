@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StopwatchComponent, MinuteSecondsPipe, ReversePipe } from './app.component';
 import { NbThemeModule } from '@nebular/theme';
 import { NbSidebarModule, NbLayoutModule, NbSidebarService, NbActionsModule } from '@nebular/theme';
-import { NbCardModule, NbProgressBarModule, NbAlertModule, NbButtonModule, NbBadgeModule} from '@nebular/theme';
+import { NbCardModule, NbProgressBarModule, NbAlertModule, NbButtonModule} from '@nebular/theme';
 
 const appRoutes: Routes = [
   { path: '', component: StopwatchComponent },
