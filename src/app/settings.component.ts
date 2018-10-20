@@ -17,7 +17,7 @@ export class TimeSettingsComponent {
   constructor(private modalService: ModalService) { }
 
   makeTimeTable(): void {
-    console.log ('Generating timetable based on: ' + this.eventName + this.startTime + this.intervalTime + this.inputColor);
+    console.log ('Generer tidtabell baserad på någe: ' + this.eventName + this.startTime + this.intervalTime + this.inputColor);
     let id = 0;
     let intStart = Number(this.startTime);
     const intInterval = Number(this.intervalTime);
